@@ -1,0 +1,27 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        from collections import defaultdict
+        max_len = 0
+        t_start = 0
+        t_end = 0
+        p = 0
+        exits = defaultdict(int)
+        for p in range(len(s)):
+            if exits[s[p]] > 0:
+                for i in range(t_start,exits[s[p]]-1):
+                    exits[s[i]] = 0
+                t_start = exits[s[p]]
+                exits[s[p]] = p + 1
+                t_end += 1
+            else:
+                exits[s[p]] = p + 1
+                t_end += 1
+                if t_end - t_start > max_len:
+                    max_len = t_end - t_start
+        return max_len
+
+
+if __name__=='__main__':
+    s = Solution()
+    list().rever
+    print(s.lengthOfLongestSubstring("tmmzuxt"))
